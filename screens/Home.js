@@ -4,15 +4,16 @@ import {Layout, Text,Divider, TopNavigation} from '@ui-kitten/components';
 import { default as appTheme } from '../custom-theme.json'; // <-- Import app theme
 import Constants from 'expo-constants';
 
-import CameraView from '../componenets/CameraView';
 
+import CameraView from '../componenets/CameraView';
+import Celeb from '../model/Celeb';
 
 
 export default class Home extends React.Component{
 
     state={
         error:false,
-        
+        celebs:[],
     }
 
     handleFaceRec = (basePic)=>{
@@ -79,6 +80,7 @@ export default class Home extends React.Component{
                     let name = celeb.person_id.substring(0,celeb.person_id.lastIndexOf("@")).split('_').join(' ');
                     let celebFaceID = celeb.face_uuid;
                     console.log(confidence + " "+name);
+                    let newCeleb = new Celeb(confidence,name,celebFaceID);
 
                 });
             }catch(e){

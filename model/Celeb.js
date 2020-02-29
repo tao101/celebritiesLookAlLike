@@ -7,5 +7,17 @@ export default class Celeb {
         this.name = name;
         this.celebFaceID = celebFaceID;
       }
+    
+    getName = ()=>{
+      return this.name;
+    }
+    
+    getConfidence = ()=>{
+      return this.confidence;
+    }
+
+    getCelebFaceID = ()=>{
+      return this.celebFaceID;
+    }
 
 }
