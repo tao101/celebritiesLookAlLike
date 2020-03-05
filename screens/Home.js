@@ -165,7 +165,7 @@ export default class Home extends React.Component{
                         return (
                             
                                 
-                                <Layout>
+                                <Layout key={celebFaceID} >
                                     <Text>{name} {confidence}</Text>
                                     <Image source={{uri:'data:image/png;base64,'+imageB64}}  style={styles.image} />
                                 </Layout>

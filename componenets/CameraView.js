@@ -63,10 +63,12 @@ export default class CameraView extends React.Component{
                 base64:true
             }
             const res = await ImagePicker.launchImageLibraryAsync(options);
-            
-            let pic = res.base64;
-            this.setState({photo:pic})
-            onPic(pic)
+            console.log(res);
+            if(! (res.cancelled == true)){
+                let pic = res.base64;
+                this.setState({photo:pic})
+                onPic(pic)
+            }
 
         }else{
             Alert.alert('Permission to Camera Roll Was denied');
