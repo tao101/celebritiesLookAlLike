@@ -152,30 +152,9 @@ export default class Home extends React.Component{
         return(
             <Layout style={styles.container} >
                 <CameraView style={styles.cam} onPic={(ar)=>this.onPic(ar)}/>
-                <Button
-                    onPress={()=>{
-                        console.log(celebs.length)
-                    }}
-                >printcelebs</Button>
                 
-                <ScrollView>
-                { celebs.map((item)=>{
-                        const {confidence, name,celebFaceID,imageB64} = item;
-                        
-                        return (
-                            
-                                
-                                <Layout key={celebFaceID} >
-                                    <Text>{name} {confidence}</Text>
-                                    <Image source={{uri:'data:image/png;base64,'+imageB64}}  style={styles.image} />
-                                </Layout>
-                                
-                            
-                        )
-                    })
-                    
-                }
-                </ScrollView>
+                
+                
                 
             </Layout>
         )
@@ -188,14 +167,15 @@ const styles = StyleSheet.create({
 
     container:{
         flex:1,
-        paddingTop: Constants.statusBarHeight ,
+        //paddingTop: Constants.statusBarHeight ,
         backgroundColor:appTheme['color-primary-100'],
         
         
     },
     cam:{
         backgroundColor:appTheme['color-primary-100'],
-        height:'50%',
+        flex:1,
+        
     },
     image:{
         width:200,

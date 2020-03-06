@@ -10,26 +10,60 @@ const width = Dimensions.get('window').width;
 
 
 
+
 export default class loading extends React.Component{
 
     state={
-        images : ['https://i.insider.com/5d66d21e6f24eb396b6c8192?width=1100&format=jpeg&auto=webp'],
+        images : [
+            require('../assets/celebs/pic0.jpeg'),
+            require('../assets/celebs/pic1.jpeg'),
+            require('../assets/celebs/pic2.jpg'),
+            require('../assets/celebs/pic3.jpg'),
+            require('../assets/celebs/pic4.jpeg'),
+            require('../assets/celebs/pic5.jpg'),
+            require('../assets/celebs/pic6.jpg'),
+            require('../assets/celebs/pic7.jpg'),
+            require('../assets/celebs/pic8.jpg'),
+            require('../assets/celebs/pic9.jpg'),
+            require('../assets/celebs/pic10.jpeg'),
+            require('../assets/celebs/pic11.jpg'),
+            require('../assets/celebs/pic12.jpg'),
+            require('../assets/celebs/pic13.jpg'),
+            require('../assets/celebs/pic14.jpeg'),
+            require('../assets/celebs/pic15.jpg'),
+        ],
         index  : 0,
     }
 
     componentDidMount(){
         const that = this;
-        setTimeout(()=>{
+        this.interval = setInterval(()=>{
             that.changeImage();
-        },1000)
+        },500)
+    }
+
+    componentWillUnmount(){
+        clearInterval(this._interval);
     }
 
     changeImage = ()=>{
         console.log('changeImage')
-        const that = this;
-        setTimeout(()=>{
-            that.changeImage();
-        },1000)
+        const {index,images} = this.state;
+        let newI = 0;
+        if(index==images.length-1){
+            newI = 0;
+        }else{
+            newI = index+1;
+        }
+        newI = Math.floor(Math.random() * images.length)
+        this.setState({index:newI})
+
+    }
+
+    onCancel = ()=>{
+        console.log("onPress")
+        const {onCancel} = this.props;
+        onCancel();
     }
 
     render(){
@@ -53,7 +87,7 @@ export default class loading extends React.Component{
                         <WaveIndicator   color={appTheme["color-primary-700"]}  size={width*30/100}  waveFactor={0.54} count={1}  />
                     </Layout>
                     <Layout style={styles.wavesContainer} >
-                        <Image style={styles.userImg} source={{uri:images[index]}} />
+                        <Image style={styles.userImg} source={images[index]} />
 
                     </Layout>
                 </Layout>
@@ -61,7 +95,7 @@ export default class loading extends React.Component{
                     <Text category='h4' style={styles.title} >PLEASE WAIT A SECOND!</Text>
                     <Text category='h6' style={styles.tagline} >We are trying to find your match</Text>
                     <Layout style={styles.buttonContainer} >
-                        <Button status='danger' size='giant' style={styles.cancelButton} >CANCEL</Button>
+                        <Button onPress={this.onCancel} status='danger' size='giant' style={styles.cancelButton} >CANCEL</Button>
                     </Layout>
                 </Layout>
                 
@@ -81,8 +115,8 @@ const styles = StyleSheet.create({
         backgroundColor:appTheme["color-primary-100"]
     },
     userImg:{
-        width:100,
-        height:100,
+        width:width*30/100,
+        height:width*30/100,
         borderRadius:120,
         zIndex:3,
     },

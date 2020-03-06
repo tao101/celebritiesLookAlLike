@@ -157,19 +157,19 @@ const styles = StyleSheet.create({
     },
     switchCam:{
         position:'absolute',
-        bottom:5,
-        right:5,
+        bottom:20,
+        right:15,
     },
     takePic:{
         position:'absolute',
-        bottom:5,
+        bottom:20,
         alignSelf:'center',
         
     },
     filePicker:{
         position:'absolute',
-        bottom:5,
-        left:5,
+        bottom:20,
+        left:15,
     },
     image:{
         flex:1,
