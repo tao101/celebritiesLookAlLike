@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet,TouchableOpacity,Image,Dimensions} from 'react-native';
-import {Layout, Text,Icon, TopNavigation,TopNavigationAction} from '@ui-kitten/components';
+import {Layout, Text,Icon, TopNavigation,TopNavigationAction,Divider} from '@ui-kitten/components';
 import { default as appTheme } from '../custom-theme.json'; // <-- Import app theme
 import Constants from 'expo-constants';
 
@@ -204,7 +204,7 @@ export default class Results extends React.Component{
                                     <Text>Instagram</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={styles.shareButton}>
-                                    <Image style={[styles.iconButton,{backgroundColor:appTheme['color-danger-600'],borderRadius:30,tintColor:appTheme['color-info-100'],resizeMode:'center'}]} source={require('../assets/download.png')} />
+                                    <Image style={[styles.iconButton,styles.savebutton]} />
                                     <Text>Save</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={[styles.iconButton,{backgroundColor:appTheme['color-danger-600'],borderRadius:30,tintColor:appTheme['color-info-100'],resizeMode:'center'}]} >
@@ -212,6 +212,7 @@ export default class Results extends React.Component{
                                     <Text>More</Text>
                                 </TouchableOpacity>
                         </Layout>
+                        <Divider  />
                     </Layout>
                 </Layout>
             )
