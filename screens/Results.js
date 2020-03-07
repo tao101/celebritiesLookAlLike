@@ -174,7 +174,12 @@ export default class Results extends React.Component{
                         style={{backgroundColor:'transparent'}}
                     />
                     <Layout style={styles.resultsContainer}>
+                        
                         <Layout style={styles.item}>
+                            <Layout style={styles.titleContainer}>
+                                <Text style={styles.appBarTitle1} category="h5">Celebs </Text>
+                                <Text style={styles.appBarTitle2} category="h5">Like Me</Text>
+                            </Layout>
                             <Layout style={styles.images}>
                                 <Image style={styles.userImg} source={require('../assets/celebs/pic0.jpeg')} /> 
                                 <Image style={styles.celeImg} source={require('../assets/celebs/pic1.jpeg')} /> 
@@ -187,9 +192,25 @@ export default class Results extends React.Component{
                                     <Text style={styles.name}>Justin Biber</Text>
                                 </Layout>
                             </Layout>
-                            <Layout style={styles.shareContainer}>
-                                
-                            </Layout>
+                            
+                        </Layout>
+                        <Layout style={styles.itemShare}>
+                                <TouchableOpacity style={styles.shareButton}>
+                                    <Image style={styles.iconButton} source={require('../assets/facebook.png')} />
+                                    <Text>Facebook</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.shareButton}>
+                                    <Image style={styles.iconButton} source={require('../assets/instagram.png')} />
+                                    <Text>Instagram</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.shareButton}>
+                                    <Image style={[styles.iconButton,{backgroundColor:appTheme['color-danger-600'],borderRadius:30,tintColor:appTheme['color-info-100'],resizeMode:'center'}]} source={require('../assets/download.png')} />
+                                    <Text>Save</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={[styles.iconButton,{backgroundColor:appTheme['color-danger-600'],borderRadius:30,tintColor:appTheme['color-info-100'],resizeMode:'center'}]} >
+                                    <Image style={styles.iconButton} source={require('../assets/more.png')} />
+                                    <Text>More</Text>
+                                </TouchableOpacity>
                         </Layout>
                     </Layout>
                 </Layout>
@@ -213,6 +234,20 @@ const styles= StyleSheet.create({
     item:{
         margin:width*2/100,
         backgroundColor:appTheme['color-primary-200'],
+        marginBottom:0,
+    },
+    itemShare:{
+        margin:width*2/100,
+        marginTop:0,
+        backgroundColor:'transparent',
+        flexDirection:'row',
+        padding:10,
+        
+    },
+    shareButton:{
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center',
     },
     images:{
         flexDirection:'row',
@@ -240,31 +275,69 @@ const styles= StyleSheet.create({
     },
     nameContainer:{
         flex:1,
-        padding:10,
-        backgroundColor:'transparent',
+       backgroundColor:'blue',
+       borderTopLeftRadius:50,
+       borderBottomLeftRadius:50,
+       marginLeft:10,
+       marginTop:10,
+       marginBottom:10,
+       justifyContent:'center',
+       alignItems:'center',
+       textAlign:'center',
+       backgroundColor:appTheme['color-info-100'],
+       height:50,
     },
     scoreContainer:{
        flex:1,
-       
-       backgroundColor:'transparent',
+       backgroundColor:'blue',
+       borderTopRightRadius:50,
+       borderBottomRightRadius:50,
+       marginRight:10,
+       marginTop:10,
+       marginBottom:10,
+       justifyContent:'center',
+       alignItems:'center',
+       textAlign:'center',
+       backgroundColor:appTheme['color-danger-600'],
+       height:50,
     },
     shareContainer:{
 
     },
     score:{
-        fontSize:25,
-        flex:1,
-        padding:10,
-        backgroundColor:'blue',
+       
+        fontSize:20,
+        fontWeight:'bold',
+        
+        color:appTheme['color-info-100'],
+        textAlign:'center'
+        
         
         
     },
     name:{
-        fontSize:25,
-        flex:1,
-        padding:10,
-        backgroundColor:'blue',
+        fontSize:20,
+        fontWeight:'bold',
         
-    }
+        color:appTheme['color-danger-600'],
+        
+        
+    },
+    titleContainer:{
+        backgroundColor:'transparent',
+        flexDirection:'row',
+        alignSelf:'center'
+    },
+    appBarTitle1:{
+        color:appTheme['color-danger-600']
+    },
+    appBarTitle2:{
+        color:appTheme['color-info-100']
+    },
+    iconButton:{
+        width:40,
+        height:40,
+        
+    },
 
 })
