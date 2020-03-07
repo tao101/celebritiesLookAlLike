@@ -98,7 +98,7 @@ export default class CameraView extends React.Component{
                                 <Icon 
                                     name='flip-2-outline' 
                                     width={40} height={40} 
-                                    fill={appTheme["color-primary-100"]} 
+                                    fill={appTheme["color-danger-600"]} 
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -108,7 +108,7 @@ export default class CameraView extends React.Component{
                                 <Icon 
                                     name='radio-button-on' 
                                     width={40} height={40} 
-                                    fill={appTheme["color-primary-100"]} 
+                                    fill={appTheme["color-danger-600"]} 
                                 />
                             </TouchableOpacity>
                             <TouchableOpacity
@@ -118,7 +118,7 @@ export default class CameraView extends React.Component{
                                 <Icon 
                                     name='image' 
                                     width={40} height={40} 
-                                    fill={appTheme["color-primary-100"]} 
+                                    fill={appTheme['color-danger-600']} 
                                 />
                             </TouchableOpacity>
                         </Layout>

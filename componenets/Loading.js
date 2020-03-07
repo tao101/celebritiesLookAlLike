@@ -43,7 +43,7 @@ export default class loading extends React.Component{
     }
 
     componentWillUnmount(){
-        clearInterval(this._interval);
+        clearInterval(this.interval);
     }
 
     changeImage = ()=>{
