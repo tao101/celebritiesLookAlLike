@@ -72,7 +72,7 @@ export default class Results extends React.Component{
             api_key:'d45fd466-51e2-4701-8da8-04351c872236',
             
             faces_uuids:[faceuuid,],
-            targets :['all@celebrities.betaface.com',]
+            targets :['all@celebrities.betaface.com']
            
         })
         }).then((response)=>response.json())
@@ -86,7 +86,11 @@ export default class Results extends React.Component{
                     celebarr.map(async (celeb) => {
                         let confidence = celeb.confidence;
                         let name = celeb.person_id.substring(0,celeb.person_id.lastIndexOf("@")).split('_').join(' ');
+                        if(name.includes('empl')) {
+                            return null;
+                        }
                         let celebFaceID = celeb.face_uuid;
+                        
                         let celebImage = await this.getCelebFace(celebFaceID);
                         
                         let newCeleb = new Celeb(confidence,name,celebFaceID,celebImage);
@@ -97,7 +101,7 @@ export default class Results extends React.Component{
     
                     })
                 )
-
+            
                 this.setState({celebs:celebs,userFaceId:faceuuid,loading:false,})
                 console.log('just updated the Ui '+ a.length)
                 console.log(a)
@@ -144,7 +148,7 @@ export default class Results extends React.Component{
     );
 
     state={
-        loading:false,
+        loading:true,
         pic:null,
         userFaceresponse:null,
         celebs:null,
@@ -157,7 +161,7 @@ export default class Results extends React.Component{
        const {pic} = this.props.route.params;
        //console.log(pic)
        this.setState({pic:pic})
-       //this.handleFaceRec(pic);
+       this.handleFaceRec(pic);
     }
 
     onCancel = ()=>{
@@ -165,18 +169,18 @@ export default class Results extends React.Component{
         this.props.navigation.popToTop()
     }
 
-    onShare = ()=>{
+    onShare = (i)=>{
         console.log('onShare')
-        this.ShareAsync();
+        this.ShareAsync(i);
     }
-    onSave = ()=>{
+    onSave = (i)=>{
         console.log('onSave')
-        this.saveToCameraRollAsync();
+        this.saveToCameraRollAsync(i);
     }
 
-    saveToCameraRollAsync = async () => {
+    saveToCameraRollAsync = async (i) => {
         try {
-          let result = await captureRef(this.container[0], {
+          let result = await captureRef(this.container[i], {
             format: 'png',
           });
     
@@ -207,10 +211,10 @@ export default class Results extends React.Component{
         }
     };
 
-    ShareAsync = async () => {
+    ShareAsync = async (i) => {
         
         try {
-          let result = await captureRef(this.container[0], {
+          let result = await captureRef(this.container[i], {
             format: 'png',
           });
     
@@ -233,7 +237,7 @@ export default class Results extends React.Component{
 
 
     render(){
-        const {loading,snapShot} =this.state;
+        const {loading,snapShot,pic,celebs} =this.state;
         
         if(loading){
             return (<Loading onCancel={this.onCancel} />)
@@ -249,44 +253,50 @@ export default class Results extends React.Component{
                     <ScrollView>
                         <Layout style={styles.resultsContainer}   >
                             
-                            <Layout style={styles.item} collapsable={false} ref={view=>{ this.container.push(view) }}>
-                                <Layout style={styles.titleContainer}>
-                                    <Text style={styles.appBarTitle1} category="h5">Celebs </Text>
-                                    <Text style={styles.appBarTitle2} category="h5">Like Me</Text>
-                                </Layout>
-                                <Layout style={styles.images}>
-                                    <Image style={styles.userImg} source={require('../assets/celebs/pic0.jpeg')} /> 
-                                    <Image style={styles.celeImg} source={require('../assets/celebs/pic1.jpeg')} /> 
-                                </Layout>
-                                <Layout style={styles.infoContainer}>
-                                    <Layout style={styles.scoreContainer}>
-                                        <Text style={styles.score}>{(0.95333544 * 100).toFixed(0)}%</Text>
-                                    </Layout>
-                                    <Layout style={styles.nameContainer}>
-                                        <Text style={styles.name}>Justin Biber</Text>
-                                    </Layout>
-                                </Layout>
+                        {
+                            celebs.map((celeb,i)=>{
                                 
-                            </Layout>
-                            <Layout style={styles.itemShare}>
-                                    <TouchableOpacity style={styles.shareButton} onPress={()=>this.onSave()} >
-                                        <Image style={styles.iconButton} source={require('../assets/download.png')} />
-                                        <Text>Save To Album</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.shareButton} onPress={()=>this.onShare()}  >
-                                        <Image style={styles.iconButton} source={require('../assets/share.png')} />
-                                        <Text>Share</Text>
-                                    </TouchableOpacity>
-                                    
-                                    
-                            </Layout>
-                            <Divider />
-                            {(snapShot!=null) && (
-                                <Layout>
-                                    <Text>sss</Text>
-                                    <Image  style={{width:'80%',height:'80%'}} source={{uri:snapShot}} />
-                                </Layout>
-                            )}
+                                return(
+                                    <Layout style={styles.resultsContainer} key={celeb.getCelebFaceID()} >
+                                            <Layout style={styles.item} collapsable={false} ref={view=>{ this.container[i]=view }}>
+                                            <Layout style={styles.titleContainer}>
+                                                <Text style={styles.appBarTitle1} category="h5">Celebs </Text>
+                                                <Text style={styles.appBarTitle2} category="h5">Like Me</Text>
+                                            </Layout>
+                                            <Layout style={styles.images}>
+                                                <Image style={styles.userImg} source={{uri:'data:image/png;base64,'+this.props.route.params.pic}} /> 
+                                                <Image style={styles.celeImg} source={{uri:'data:image/png;base64,'+celeb.getImageB64()}} /> 
+                                            </Layout>
+                                            <Layout style={styles.infoContainer}>
+                                                <Layout style={styles.scoreContainer}>
+                                                    <Text style={styles.score}>{(celeb.getConfidence() * 100).toFixed(0)}%</Text>
+                                                </Layout>
+                                                <Layout style={styles.nameContainer}>
+                                                    <Text style={styles.name}>{celeb.getName()}</Text>
+                                                </Layout>
+                                            </Layout>
+                                            
+                                        </Layout>
+                                        <Layout style={styles.itemShare}>
+                                                <TouchableOpacity style={styles.shareButton} onPress={()=>this.onSave(i)} >
+                                                    <Image style={styles.iconButton} source={require('../assets/download.png')} />
+                                                    <Text>Save To Album</Text>
+                                                </TouchableOpacity>
+                                                <TouchableOpacity style={styles.shareButton} onPress={()=>this.onShare(i)}  >
+                                                    <Image style={styles.iconButton} source={require('../assets/share.png')} />
+                                                    <Text>Share</Text>
+                                                </TouchableOpacity>
+                                                
+                                                
+                                        </Layout>
+                                        <Divider />
+                                    </Layout>
+                                )
+
+                            })
+                        }
+                            
+                            
                         </Layout>
                     
                     </ScrollView>
