@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         flex:3,
         backgroundColor:appTheme['color-danger-600'],
         borderBottomRightRadius:150,
-        paddingTop: Constants.statusBarHeight ,
+        //paddingTop: Constants.statusBarHeight ,
     },
     contnetContainer:{
         flex:2,
@@ -137,10 +137,18 @@ const styles = StyleSheet.create({
         alignSelf:'flex-end',
         position:'absolute',
         right:10,
+        top:Constants.statusBarHeight,
     },
     titleContainer:{
         backgroundColor:'transparent',
         flexDirection:'row',
+        paddingTop: Constants.statusBarHeight ,
+        
+        flex:1,
+        textAlign:'center',
+        alignItems:'center',
+        justifyContent:'center'
+        
     },
     appBarTitle1:{
         color:appTheme['color-primary-100']
