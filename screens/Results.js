@@ -131,6 +131,9 @@ export default class Results extends React.Component{
             
         }catch (error){
             console.log(error);
+            this.setState({error:true})
+
+
             return null;
         }
         
@@ -155,6 +158,7 @@ export default class Results extends React.Component{
         snapShot:null,
         rollGranted: false,
         cameraGranted: false,
+        error:null,
     }
 
     componentDidMount = ()=>{
@@ -208,6 +212,7 @@ export default class Results extends React.Component{
         }
         catch(snapshotError) {
           console.error(snapshotError);
+          this.setState({error:true})
         }
     };
 
@@ -232,13 +237,18 @@ export default class Results extends React.Component{
         }
         catch(snapshotError) {
           console.error(snapshotError);
+          this.setState({error:true})
         }
     };
 
 
     render(){
-        const {loading,snapShot,pic,celebs} =this.state;
-        
+        const {loading,snapShot,pic,celebs,error} =this.state;
+
+        if(error === true) {
+           Alert.alert('There was an Error could you please try again')
+           this.props.navigation.popToTop()
+        }
         if(loading){
             return (<Loading onCancel={this.onCancel} />)
         }else{
