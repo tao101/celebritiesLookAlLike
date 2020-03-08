@@ -1,21 +1,24 @@
 {
   "expo": {
-    "name": "Blank Template",
+    "name": "Celebs Like Me",
+    "description":"Celebrity Look-alike determines which celebrities look like you. It uses advanced machine learning API based on a deep neural network to search through a database of over 20 000 celebrities.",
     "slug": "celebritiesLookAlLike",
     "privacy": "public",
     "sdkVersion": "36.0.0",
+    "githubUrl":"https://github.com/tao101/celebritiesLookAlLike",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
+    "primaryColor":"#a51d2e",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#a51d2e"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -24,7 +27,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.taoufiqlotfi.celebslikeme"
+    },
+    "android":{
+      "package": "com.taoufiqlotfi.celebslikeme"
     }
   }
 }
