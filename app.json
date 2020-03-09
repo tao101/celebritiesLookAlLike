@@ -29,11 +29,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.taoufiqlotfi.celebslikeme",
-      "buildNumber": "1.0.0"
+      "buildNumber": "2.0.0"
     },
     "android":{
       "package": "com.taoufiqlotfi.celebslikeme",
-      "versionCode": 1
+      "versionCode": 2
     }
   }
 }
