@@ -6,4 +6,5 @@ then it genearates an image you could save on your device or share on social med
 [![IMAGE ALT TEXT HERE](https://github.com/tao101/celebritiesLookAlLike/blob/master/celeblookalike%20assets/featured.png?raw=true)](https://www.youtube.com/watch?v=tska6gQebCA)
 
 Video of the app testRun : 
+
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/tska6gQebCA/0.jpg)](https://www.youtube.com/watch?v=tska6gQebCA)
